@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  
+}
+
+.underline-effect::before{
+  
+  content: "";
+  position: absolute;
+  top: 140%;
+  width: 100%;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(111.3deg, #9c27b0 9.6%, #00bcd4 93.6%);
+  
+}
+
+.section:hover::before{
+  content: "";
+  position: absolute;
+  top: 140%;
+  width: 100%;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(111.3deg, #9c27b0 9.6%, #00bcd4 93.6%);
+}
+.z-front{
+  z-index: 99;
+}
+
+.lock-scroll{
+  overflow-y: hidden;
+}
+
