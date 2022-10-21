@@ -12,19 +12,19 @@ contract FactoryV1{
     }
 
     function createLendingPool(
-        string memory name,
-        string memory symbol,
+        string calldata name,
+        string calldata symbol,
         uint256 liquidationThreshold , 
         uint256 fees , 
         uint256 liquidationReward
-    ) public returns(address){
+    ) external returns(address){
         require(liquidationReward<100 && fees<100 && liquidationReward<100 , "Limit is 99%");
         Lending l = new Lending(name , symbol , liquidationThreshold , fees ,  liquidationReward);
         addressProvider.addLendingPool(address(l));
         Ownable(address(l)).transferOwnership(msg.sender);
         
     }
-    function createPool(address tokenAddress) public returns(address ){
+    function createExchange(address tokenAddress) external returns(address ){
         require(tokenAddress!=address(0) , "Token address not valid");
         Exchange exchange = new Exchange(tokenAddress);
         Ownable(address(exchange)).transferOwnership(msg.sender);
