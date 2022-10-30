@@ -28,11 +28,11 @@ export default function Header(props) {
         </div>
         {wallet.provider && (
             <div className={styles.div + 'hidden md:flex'}>
+                <Link href='/'>
+                Swap
+                </Link>
                 <Link href='/lending'>
                 Lending
-                </Link>
-                <Link href='/swap'>
-                Swap
                 </Link>
                 <Link href='/stableswap'>
                 Stableswap
