@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html>
       <Head />
-      <body className='bg-l dark:bg-d text-d dark:text-l'>
+      <body className='dark:text-l text-d dark:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-slate-500 to-yellow-100 '>
         <Main />
         <NextScript />
       </body>

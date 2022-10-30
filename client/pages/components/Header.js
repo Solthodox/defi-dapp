@@ -9,7 +9,7 @@ export default function Header(props) {
     const {theme, setTheme} = useTheme()
     const wallet = useWeb3()
     const styles = {
-        mainContainer: 'smd:px-48 sm:px-auto px-24 w-full sticky top-0 py-2   flex items-center justify-between',
+        mainContainer: 'smd:px-48 sm:px-24 w-full sticky top-0 py-2   flex items-center justify-between',
         logo: 'h-12 w-12',
         title: 'font-bold text-2xl' ,
         button: 'dark:bg-l font-bold  bg-d text-l dark:text-d rounded-md px-8 py-4',
@@ -44,7 +44,7 @@ export default function Header(props) {
             ? <MdDarkMode  className={styles.themeIcon} onClick={switchTheme}/>
             : <MdLightMode className={styles.themeIcon}  onClick={switchTheme}/>
             }
-            {!wallet.address 
+            {!wallet.provider 
             ? <button className={styles.button} onClick={wallet.connect}>Connect</button>
             : <button className={styles.button} onClick={wallet.forget}>{wallet.address.slice(0,15)}...</button>
             }

@@ -1,8 +1,14 @@
 import React from 'react'
+import Header from './components/Header'
 
 function lending() {
+  const styles = {
+    main: 'h-screen w-full'
+  }
   return (
-    <div>lending</div>
+    <div className={styles.main}>
+      <Header/>
+    </div>
   )
 }
 
