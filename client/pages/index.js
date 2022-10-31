@@ -24,7 +24,7 @@ export default function Home() {
   const [loadingState, setLoadingState] = useState('not-loaded')
   const [node, setNode] = useState()
   const [amountIn, setAmountIn] = useState('0.00')
-  const [pool, setPool] = useState('0xB911f76D4f6A7763e3Fb22977CAF7021707bd4d0')
+  const [pool, setPool] = useState('0x6bBBDb407759637Cb5bdB893B33B3BFEEcC4E478')
   const [_tokens, setTokens] = useState()
 
 
@@ -55,7 +55,7 @@ export default function Home() {
   const getPool =  (token0, token1) => {
     setSelectedTokens([token0, token1])
     setPool(dex.pools.get(token0.address, token1.address))
-    updateExchangeRate()
+    updateExchangeRate(amountIn/ (10**18))
   }
 
   const updateExchangeRate = async(newAmount) =>{
@@ -96,7 +96,7 @@ export default function Home() {
         <div className={styles.box}>
          <div className={styles.form}>
          <select onChange={e=>getPool(JSON.parse(e.target.value), selectedTokens[1])} className={styles.select}>
-            {_tokens.map((token,i) => 
+            {_tokens.filter(token=>token.name != selectedTokens[1].name).map((token,i) => 
               token === selectedTokens[0] 
               ? <option key={i} value={JSON.stringify(token)} selected className={styles.option}>{token.name}</option>
               :  <option key={i} value={JSON.stringify(token)} className={styles.option}>{token.name}</option>)}
@@ -107,7 +107,7 @@ export default function Home() {
           <MdSwapVert className='h-8 my-4 flex justify-center cursor-pointer w-8' onClick={switchSelected} />
           <div className={styles.form}>
             <select onChange={e=>getPool(selectedTokens[0], JSON.parse(e.target.value))}  className={styles.select}>
-            {_tokens.map((token,i) => 
+            {_tokens.filter(token=>token.name != selectedTokens[0].name).map((token,i) => 
               token === selectedTokens[1]
               ?  <option key={i} value={JSON.stringify(token)} selected className={styles.option}>{token.name}</option>
               :  <option key={i} value={JSON.stringify(token)} className={styles.option}>{token.name}</option>)}
@@ -115,7 +115,7 @@ export default function Home() {
             </select>
             <input type='text' value={!amountIn!=0 ? '0.00' :exchangeRate.dy} disabled className={styles.input}></input>
           </div>
-          {amountIn>0 && <span className='text-l/30 dark:text-d/70 text-sm mt-4'>Slippage: {exchangeRate.slippage}%</span> }
+          {amountIn>0 && <span className='text-l/30 dark:text-d/70 text-sm mt-4'>Slippage: {exchangeRate.slippage * 100}%</span> }
           {wallet.provider 
           ? <button onClick={swap} className={styles.button}>Swap</button>
           : <button onClick={wallet.connect} className={styles.button}  >Swap</button>
