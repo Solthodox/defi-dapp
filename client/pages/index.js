@@ -1,7 +1,7 @@
 import { dex, tokens } from '../config'
 import Header from './components/Header'
 import Pair from '../abis/contracts/Dex/Pair.sol/Pair.json'
-import { React, useState } from 'react'
+import { React, useState} from 'react'
 import Footer from './components/Footer'
 import { ethers } from 'ethers'
 import {MdSwapVert} from "react-icons/md"
@@ -26,7 +26,6 @@ export default function Home() {
   const [amountIn, setAmountIn] = useState('0.00')
   const [pool, setPool] = useState('0x6bBBDb407759637Cb5bdB893B33B3BFEEcC4E478')
   const [_tokens, setTokens] = useState(tokens)
-
 
   const PerformSwap = async(e) => {
     e.preventDefault()
@@ -77,6 +76,9 @@ export default function Home() {
     setExchangeRate({...exchangeRate, dy: 1/ exchangeRate.dy})
   }
 
+  useEffect(()=>{
+    getData()
+  },[])
 
   return (
     <div className={styles.main}>
