@@ -4,11 +4,11 @@ import {ThemeProvider} from 'next-themes'
 
 export default function MyApp({ Component, pageProps }) {
   return (
-  <Web3Provider>
-    <ThemeProvider attribute='class'>
+  <ThemeProvider attribute='class'>
+    <Web3Provider>
       <Component {...pageProps} />
-    </ThemeProvider>
-  </Web3Provider>
+    </Web3Provider>
+  </ThemeProvider>
   )
 }
 

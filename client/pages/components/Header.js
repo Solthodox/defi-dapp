@@ -47,6 +47,9 @@ export default function Header(props) {
                 <Link href='/stableswap'>
                 Stableswap
                 </Link>
+                <Link href='/mint'>
+                Mint
+                </Link>
             </div>
         )}
         <div className={styles.div + 'flex items-center'}>

@@ -1,8 +1,9 @@
 import mockComp from './abis/contracts/MockTokens.sol/mockComp.json'
-import mockChz from './abis/contracts/MockTokens.sol/mockChz.json'
 import mockLink from './abis/contracts/MockTokens.sol/mockLink.json'
-import mockUsdt from './abis/contracts/MockTokens.sol/mockComp.json'
-export class DoubleMap{
+import mockUsdt from './abis/contracts/MockTokens.sol/mockUsdt.json'
+import mockChz from './abis/contracts/MockTokens.sol/mockChz.json'
+
+class DoubleMap{
     constructor(arr){
         this.data = new Map()
         arr.map(a=> {

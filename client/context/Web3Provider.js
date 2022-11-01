@@ -8,7 +8,7 @@ export function useWeb3(){
     return useContext(Web3Context)
 }
 
-export function Web3Provider({children}) {
+export  function Web3Provider({children}) {
   const [provider , setProvider] = useState()
   const [signer , setSigner] = useState()
   const [address , setAddress] = useState()

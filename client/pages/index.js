@@ -1,41 +1,34 @@
 import { dex, tokens } from '../config'
 import Header from './components/Header'
 import Pair from '../abis/contracts/Dex/Pair.sol/Pair.json'
-import { useEffect, useState } from 'react'
+import { React, useState } from 'react'
 import Footer from './components/Footer'
 import { ethers } from 'ethers'
 import {MdSwapVert} from "react-icons/md"
-import {useWeb3} from "../context/Web3Provider"
+import { useWeb3 } from '../context/Web3Provider'
+
 
 export default function Home() {
+  const node = new ethers.providers.JsonRpcProvider('https://rpc.testnet.fantom.network')
+  const wallet = useWeb3()
   const styles = {
-    main: ' w-full',
+    main: ' w-full h-screen flex flex-col justify-between',
     container: 'flex flex-col items-center mb-36',
     box: 'py-16 px-8 flex flex-col items-center rounded-md bg-d dark:bg-l text-l dark:text-d my-32',
     form: 'rounded-md border border-l/30 dark:border-d/30',
     select:'w-18 bg-d dark:bg-l outline-none cursor-pointer rounded-md px-2 py-4',
     input:'rounded-md outline-none px-4 dark:bg-l bg-d text-l dark:text-d' ,
     option: 'dark:bg-l bg-d text-l dark:text-d rounded-p-4',
-    button: 'w-full mt-8 text-d dark:text-l px-16 py-4 rounded-md dark:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-slate-500 to-yellow-100'
+    button: 'w-full mt-8 text-d font-bold dark:text-l px-16 py-4 rounded-md dark:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-slate-500 to-yellow-100'
   }
   const [selectedTokens, setSelectedTokens] = useState([tokens[1],tokens[3]])
   const [exchangeRate, setExchangeRate] = useState({dy:'0.00', slippage:''})
-  const wallet = useWeb3()
-  const [loadingState, setLoadingState] = useState('not-loaded')
-  const [node, setNode] = useState()
   const [amountIn, setAmountIn] = useState('0.00')
   const [pool, setPool] = useState('0x6bBBDb407759637Cb5bdB893B33B3BFEEcC4E478')
-  const [_tokens, setTokens] = useState()
+  const [_tokens, setTokens] = useState(tokens)
 
 
-  const getData = async()=>{
-    const node = new ethers.providers.JsonRpcProvider('https://rpc.testnet.fantom.network')
-    setNode(node)
-    setTokens(tokens)
-    setLoadingState('loaded')
-  } 
-
-  const swap = async(e) => {
+  const PerformSwap = async(e) => {
     e.preventDefault()
     if(!wallet.provider) wallet.connect();
     try{
@@ -43,8 +36,8 @@ export default function Home() {
       const token0 = new ethers.Contract(selectedTokens[0].address, selectedTokens[0].abi, wallet.signer)
       const approval = await token0.approve(pair.address, parseInt(amountIn).toString())
       await approval.wait()
-      const swap = await pair.swap(selectedTokens[0].address, parseInt(amountIn).toString())
-      await swap.wait()
+      const tx = await pair.swap(selectedTokens[0].address, parseInt(amountIn).toString())
+      await tx.wait()
       console.log('Done')
     }catch(e){
       console.log(e)
@@ -84,12 +77,8 @@ export default function Home() {
     setExchangeRate({...exchangeRate, dy: 1/ exchangeRate.dy})
   }
 
-  useEffect(()=>{
-    getData()
-    console.log(selectedTokens)
-    console.log(pool)
-  },[])
-  if(loadingState==='loaded') return (
+
+  return (
     <div className={styles.main}>
       <Header />
         <div className={styles.container}>
@@ -117,16 +106,13 @@ export default function Home() {
           </div>
           {amountIn>0 && <span className='text-l/30 dark:text-d/70 text-sm mt-4'>Slippage: {exchangeRate.slippage * 100}%</span> }
           {wallet.provider 
-          ? <button onClick={swap} className={styles.button}>Swap</button>
-          : <button onClick={wallet.connect} className={styles.button}  >Swap</button>
-          }
-          
+          ? <button onClick={PerformSwap} className={styles.button}>Swap</button>
+          : <button onClick={wallet.connect} className={styles.button}  >Connect</button>
+          }  
 
         </div>
       </div>
       <Footer />
-      
-      
     </div>
   )
 }
