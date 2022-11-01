@@ -1,6 +1,7 @@
 import mockComp from './abis/contracts/MockTokens.sol/mockComp.json'
 import mockLink from './abis/contracts/MockTokens.sol/mockLink.json'
 import mockUsdt from './abis/contracts/MockTokens.sol/mockUsdt.json'
+import mockUsdc from './abis/contracts/MockTokens.sol/mockUsdc.json'
 import mockChz from './abis/contracts/MockTokens.sol/mockChz.json'
 
 class DoubleMap{
@@ -50,6 +51,11 @@ export const dex  = {
     ])
         
 }
+export const stableswap = {
+    factory : '0x54Fdd4670e0ceAA801c03E8775C04a4860391644',
+    pools : new DoubleMap(['0xb2fc6f780f46205359516a02B85DFA9DaEc29E50','0x8047FD785B4C828fb30B56AafC2dcf5E27CA3780', '0xf5b87A616De1d277668AE2FC5d6b0003566192c6'])
+}
+
 export const lending = {}
 
 export const tokens = [
@@ -76,6 +82,26 @@ export const tokens = [
         name : 'USDT',
         logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png',
         abi: mockUsdt.abi
+    },
+    {
+        address :'0x8047FD785B4C828fb30B56AafC2dcf5E27CA3780' ,
+        name : 'USDC',
+        logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png',
+        abi: mockUsdc.abi
     }
 ]
 
+export const stableTokens = [
+    {
+        address :'0xb2fc6f780f46205359516a02B85DFA9DaEc29E50' ,
+        name : 'USDT',
+        logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png',
+        abi: mockUsdt.abi
+    },
+    {
+        address :'0x8047FD785B4C828fb30B56AafC2dcf5E27CA3780' ,
+        name : 'USDC',
+        logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png',
+        abi: mockUsdc.abi
+    }
+]

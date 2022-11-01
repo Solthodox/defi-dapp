@@ -30,6 +30,7 @@ export default function Mint() {
         <Header/>
         <div className={styles.container}>
             <div className={styles.box}>
+            <h1>Get you 20 billion tokens to play around ;)</h1>
                 <select onChange={e=>setSelected(JSON.parse(e.target.value))} className={styles.select}>
                     <option value={JSON.stringify(tokens[0])}  className={styles.option}>CHZ</option>
                     <option value={JSON.stringify(tokens[1])}  className={styles.option}>COMP</option>

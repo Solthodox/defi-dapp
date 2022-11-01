@@ -1,9 +1,19 @@
-import React from 'react'
 
-function stableswap() {
+import Header from './components/Header'
+import Footer from './components/Footer'
+import StableSwapInterface from './components/StableSwapInterface'
+
+export default function StableSwap() {
+  const styles = {
+    main: ' w-full h-screen flex flex-col justify-between',
+  }
+ 
+
   return (
-    <div>stableswap</div>
+    <div className={styles.main}>
+      <Header />
+      <StableSwapInterface />
+      <Footer />
+    </div>
   )
 }
-
-export default stableswap
