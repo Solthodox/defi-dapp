@@ -56,7 +56,9 @@ export const stableswap = {
     pools : new DoubleMap(['0xb2fc6f780f46205359516a02B85DFA9DaEc29E50','0x8047FD785B4C828fb30B56AafC2dcf5E27CA3780', '0xf5b87A616De1d277668AE2FC5d6b0003566192c6'])
 }
 
-export const lending = {}
+export const lending = {
+    pool:'0x775C0C0E7E59D97c093005613509fb831A57EBBD'
+}
 
 export const tokens = [
     {
@@ -103,5 +105,20 @@ export const stableTokens = [
         name : 'USDC',
         logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png',
         abi: mockUsdc.abi
+    }
+]
+
+export const lendingTokens = [
+    {
+        address :'0xb2fc6f780f46205359516a02B85DFA9DaEc29E50' ,
+        name : 'USDT',
+        logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png',
+        abi: mockUsdt.abi
+    },
+    {
+        address :'0x0E7A488886e57EE3d7d33d96Cf5fD6BdF070BCdb' ,
+        name : 'LINK',
+        logo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1975.png',
+        abi: mockLink.abi
     }
 ]

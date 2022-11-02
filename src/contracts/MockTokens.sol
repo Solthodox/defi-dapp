@@ -49,3 +49,13 @@ contract mockUsdt is ERC20 {
         _mint(msg.sender, 2000000000 * 10**18);
     }
 }
+
+contract mockUsdc is ERC20 {
+    constructor() ERC20("USD Thether", "USDT") {
+        _mint(msg.sender, 2000000000 * 10**18);
+    }
+
+    function mint() external {
+        _mint(msg.sender, 2000000000 * 10**18);
+    }
+}

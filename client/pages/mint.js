@@ -36,6 +36,7 @@ export default function Mint() {
                     <option value={JSON.stringify(tokens[1])}  className={styles.option}>COMP</option>
                     <option value={JSON.stringify(tokens[2])}  className={styles.option}>LINK</option>
                     <option value={JSON.stringify(tokens[3])}  className={styles.option}>USDT</option>
+                    <option value={JSON.stringify(tokens[4])}  className={styles.option}>USDC</option>
                 </select>
                 <button onClick={mint} className={styles.button}>Mint</button>
             </div>

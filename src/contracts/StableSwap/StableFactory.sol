@@ -13,7 +13,7 @@ contract Factory is Ownable {
         onlyOwner
         returns (address pair)
     {
-        require(tokenA != tokenB, "PS-Factory: ADDRESS_EQUAL");
+        require(tokenA == tokenB, "PS-Factory: ADDRESS_EQUAL");
         (address token0, address token1) = tokenA < tokenB
             ? (tokenA, tokenB)
             : (tokenB, tokenA);
