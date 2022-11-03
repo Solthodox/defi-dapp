@@ -10,12 +10,13 @@ export default function LendingInterface() {
     const [assets, setAssets] = useState({})
     const [showBorrow, setShowBorrow] = useState(false)
     const [showSupply, setShowSupply] = useState(false)
+    const [health, setHealth] = useState()
     const [loadingState, setLoadingState] = useState('not-loaded')
     const styles = {
         network: 'flex space-x-2 items-center my-8 justify-start w-full px-32 rounded-md',
         title: 'font-bold text-2xl text-l dark:text-d',
-        userData:' w-full flex flex-wrap',
-        market : 'w-full flex flex-wrap my-16',
+        userData:' w-full flex flex-wrap px-16',
+        market : 'w-full px-16 flex flex-wrap my-16',
         box: 'w-1/2 ',
         container:'rounded-md mx-4 px-4 bg-d dark:bg-l py-4',
         button: ' text-d font-bold dark:text-l px-8 py-2 rounded-md dark:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] dark:from-gray-700 dark:via-gray-900 dark:to-black bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-slate-500 to-yellow-100',
@@ -31,15 +32,39 @@ export default function LendingInterface() {
         setShowSupply(!showSupply)
     }
 
+    const handleClickWithdraw = e => {
+        e?.preventDefault()
+        //setShowSupply(!showSupply)
+    }
+    const handleClickRepay = e => {
+        e?.preventDefault()
+        //setShowSupply(!showSupply)
+    }
     const fetchAssets =async () => {
         const instance = new ethers.Contract('0x775C0C0E7E59D97c093005613509fb831A57EBBD', Lending.abi, wallet.signer)
-        setAssets(instance)
+        const borrowedUsdt = await instance.s_accountToTokenBorrows(wallet.address, lendingTokens[0].address)
+        const depositedUsdt = await instance.s_accountToTokenDeposits(wallet.address, lendingTokens[0].address)
+        const borrowedLink = await instance.s_accountToTokenBorrows(wallet.address, lendingTokens[1].address)
+        const depositedLink = await instance.s_accountToTokenDeposits(wallet.address, lendingTokens[1].address)
+        setAssets([
+            [parseFloat(borrowedUsdt),parseFloat(depositedUsdt)], [parseFloat(borrowedLink),parseFloat(depositedLink)]
+        ])
+        const _health = await instance.healthFactor(wallet.address)
+        setHealth(parseInt(_health))
         setLoadingState('loaded')
     }
 
-    
+    const borrow = async() =>{}
+    const deposit = async() =>{}
+    const repay = async() =>{}
+    const withdraw = async() =>{}
+
     useEffect(()=>{
         fetchAssets()
+        window.ethereum.on('accountsChanged', accounts=> {
+            setLoadingState('not-loaded')
+            fetchAssets()
+        })
     },[])
 
     
@@ -69,15 +94,20 @@ export default function LendingInterface() {
         <div className={styles.network}>
             <Image className='rounded-full' src='/ftm.png' height={50} width={50}></Image>
             <h1 className='text-xl font-bold '>Fantom Testnet</h1>
+            <div className='flex flex-col'> 
+                <h3>Health factor:</h3>
+                <p>{health}</p>
+            </div>
         </div>
         <div className={styles.userData}>
             <div className={styles.box}>
                 <div className={styles.container}>
                     <h1 className={styles.title}>Your supplies</h1>
-                    {lendingTokens.map(token=>(
-                        <div className='flex w-full my-2 justify-between items-center'>
+                    {lendingTokens.filter((token,i)=>assets[i][1]>0).map((token,i)=>(
+                        <div  key={i}className='flex w-full my-2 justify-between items-center'>
                             <img src={token.logo} height={30} width={30} />
-                            <span className=' text-l dark:text-d'>{token.name}</span>
+                            <span className=' text-l dark:text-d'>{parseFloat((assets[i][1])/(10**18))} {token.name}</span>
+                            <button className={styles.button}>Withdraw</button>
                         </div>
                     ))}
                 </div>
@@ -86,10 +116,11 @@ export default function LendingInterface() {
             <div className={styles.box}>
                 <div className={styles.container}>
                     <h1 className={styles.title}>Your borrows</h1>
-                    {lendingTokens.map(token=>(
-                        <div className='flex w-full my-2 justify-between items-center'>
+                    {lendingTokens.filter((token,i)=>assets[i][0]>0).map((token,i)=>(
+                        <div key={i} className='flex w-full my-2 justify-between items-center'>
                             <img src={token.logo} height={30} width={30} />
-                            <span className=' text-l dark:text-d'>{token.name}</span>
+                            <span className=' text-l dark:text-d'>{parseFloat((assets[i][0])/(10**18)).toFixed(8)} {token.name}</span>
+                            <button className={styles.button}>Repay</button>
                         </div>
                     ))}
                 </div>
