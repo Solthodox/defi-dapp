@@ -10,7 +10,7 @@ function lending() {
   return (
     <div className={styles.main}>
       <Header/>
-      <LendingInterface/>
+      <LendingInterface />
       <Footer/>
     </div>
   )
