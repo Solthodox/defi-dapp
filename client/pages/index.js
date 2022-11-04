@@ -5,7 +5,7 @@ import SwapInterface from './components/SwapInterface'
 
 export default function Home() {
   const styles = {
-    main: ' w-full h-screen flex flex-col justify-between',
+    main: ' w-full min-h-screen flex flex-col justify-between',
   }
  
 

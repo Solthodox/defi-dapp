@@ -8,8 +8,8 @@ export default function Mint() {
     const [selected , setSelected] = useState(tokens[0])
     const wallet = useWeb3()
     const styles={
-        main: 'w-full h-screen flex flex-col justify-between',
-        container: 'flex flex-col items-center mb-36',
+        main: 'w-full min-h-screen flex flex-col justify-between',
+        container: 'flex flex-col items-center',
         box: 'py-16 px-8 flex flex-col items-center rounded-md bg-d dark:bg-l text-l dark:text-d my-32',
         form: 'rounded-md border border-l/30 dark:border-d/30',
         select:'w-18 bg-d dark:bg-l outline-none cursor-pointer rounded-md px-2 py-4',

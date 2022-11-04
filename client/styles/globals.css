@@ -28,3 +28,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+.header{
+  z-index: 99;
+}
+.hideInHeader{
+  z-index: 1;
+}

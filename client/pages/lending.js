@@ -5,7 +5,7 @@ import LendingInterface from './components/LendingInterface'
 
 function lending() {
   const styles = {
-    main: 'w-full h-screen flex flex-col items-center justify-between'
+    main: 'w-full min-h-screen flex flex-col items-center justify-between'
   }
   return (
     <div className={styles.main}>

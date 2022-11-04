@@ -57,7 +57,7 @@ export const stableswap = {
 }
 
 export const lending = {
-    pool:'0x775C0C0E7E59D97c093005613509fb831A57EBBD'
+    pool:'0xbC6b4FCEa8DBFb3f957c98544d2E6E4755AFF49c',
 }
 
 export const tokens = [

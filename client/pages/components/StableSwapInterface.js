@@ -14,7 +14,7 @@ export default function DefaultInterface() {
     const [pool, setPool] = useState('0xf5b87A616De1d277668AE2FC5d6b0003566192c6')
     const [_tokens, setTokens] = useState(stableTokens)
     const styles = {
-        container: 'flex flex-col items-center mb-36',
+        container: 'flex flex-col items-center ',
         box: 'py-16 px-8 flex flex-col items-center rounded-md bg-d dark:bg-l text-l dark:text-d my-32',
         form: 'rounded-md border border-l/30 dark:border-d/30',
         select:'w-18 bg-d dark:bg-l outline-none cursor-pointer rounded-md px-2 py-4',
