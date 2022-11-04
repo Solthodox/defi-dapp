@@ -69,7 +69,8 @@ export default function DefaultInterface() {
       const switchSelected= async() => {
         setSelectedTokens(selectedTokens.reverse());  
         setTokens(_tokens.map((t,i) =>_tokens[i]))
-        setExchangeRate({...exchangeRate, dy: 1/ exchangeRate.dy})
+        const temp = exchangeRate.dy
+        setExchangeRate({...exchangeRate, dy: (amountIn  / temp * amountIn)/(10*36)})
       }
 
   return (
